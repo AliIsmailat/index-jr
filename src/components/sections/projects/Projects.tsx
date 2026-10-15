@@ -31,7 +31,7 @@ export function Projects() {
                   ...item,
                 }}
                 reverse={index % 2 === 1}
-                sizes="(min-width: 1024px) 660px, calc(100vw - 2rem)"
+                sizes="(min-width: 1024px) 430px, 62vw"
               />
             </li>
           ))}

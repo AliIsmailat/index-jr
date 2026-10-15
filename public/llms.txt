@@ -1,0 +1,19 @@
+# Index JR
+
+> Snabba, tillgängliga hemsidor för lokala företag i Malmö, byggda av Ali Ismailat med React och TypeScript.
+
+## Sidor
+
+- [Svenska](https://indexjr.com/): Startsida med projekt, tjänster, process och kontakt
+- [English](https://indexjr.com/en/): The same site in English
+
+## Projekt
+
+- [Café Kardemumma (demo)](https://cafekardemumma.netlify.app/): Café med bordsbokning
+- [Pizzeria Bella Nova (demo)](https://pizzeria-bella-nova.netlify.app/): Pizzeria där besökaren ringer och beställer
+- [Skarp Barber (demo)](https://skarp-barber.netlify.app/): Barbershop med bokningsschema
+- [Nordkant Installation (demo)](https://nordkant-installation.netlify.app/): VVS och el med offertformulär
+
+## Kontakt
+
+- [E-post](mailto:contact@indexjr.com)

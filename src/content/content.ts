@@ -1,4 +1,5 @@
-export type IconName = 'window' | 'calendar' | 'gauge' | 'phone' | 'mail' | 'pin' | 'check' | 'arrow'
+export type IconName =
+  'window' | 'calendar' | 'gauge' | 'phone' | 'mail' | 'pin' | 'check' | 'arrow'
 
 export type ProjectId = 'cafe' | 'pizzeria' | 'barber' | 'nordkant' | 'memory'
 
@@ -36,11 +37,11 @@ export const projectData: Record<ProjectId, ProjectData> = {
 }
 
 export const siteUrl = ''
-  export const social = {
-    instagram: { url: 'https://www.instagram.com/index.jr/', handle: 'index.jr' },
-      github: { url: 'https://github.com/AliIsmailat', handle: 'AliIsmailat' },
+export const social = {
+  instagram: { url: 'https://www.instagram.com/index.jr/', handle: 'index.jr' },
+  github: { url: 'https://github.com/AliIsmailat', handle: 'AliIsmailat' },
   linkedin: { url: 'https://www.linkedin.com/in/ali-ismailat-b21401231/', handle: 'Ali Ismailat' },
-  }
+}
 
 export const theme = {
   colors: {
@@ -70,8 +71,18 @@ export const theme = {
     onLime: '#111214',
   },
   fonts: {
-    display: { family: 'Bricolage Grotesque', weights: [500, 700, 800] },
-    body: { family: 'Instrument Sans', weights: [400, 500, 600, 700] },
+    display: {
+      family: 'Bricolage Grotesque',
+      file: 'bricolage-grotesque-latin-wght-normal.woff2',
+      range: '200 800',
+      fallback: { sizeAdjust: 104.13, ascent: 89.32, descent: 25.93 },
+    },
+    body: {
+      family: 'Instrument Sans',
+      file: 'instrument-sans-latin-wght-normal.woff2',
+      range: '400 700',
+      fallback: { sizeAdjust: 103.86, ascent: 93.39, descent: 24.07 },
+    },
   },
   radius: { card: '20px' },
 }

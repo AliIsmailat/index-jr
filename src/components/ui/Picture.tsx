@@ -9,7 +9,7 @@ const srcSets = import.meta.glob<string>(
     eager: true,
     import: "default",
     query: {
-      w: "480;800;1200;1600",
+      w: "240;480;800;1200;1600",
       format: "webp",
       as: "srcset",
       withoutEnlargement: true,

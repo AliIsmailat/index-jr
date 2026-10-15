@@ -54,7 +54,7 @@ export const en: Site = {
     proof: [
       { value: '5', label: 'projects of my own' },
       { value: '90+', label: 'Lighthouse score on the demo sites' },
-      { value: '100', label: 'accessibility score on all four' },
+      { value: '100', label: 'accessibility score on all five' },
     ],
   },
 

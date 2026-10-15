@@ -24,17 +24,7 @@
         document.documentElement.dataset.theme = theme
       })()
     </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="{{fontsUrl}}"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <noscript>
-      <link rel="stylesheet" href="{{fontsUrl}}" />
-    </noscript>
+    {{fontPreloads}}
   </head>
   <body>
     <div id="root"></div>

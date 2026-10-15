@@ -21,8 +21,18 @@ export default {
         'on-lime': token('on-lime'),
       },
       fontFamily: {
-        display: [`"${theme.fonts.display.family}"`, 'system-ui', 'sans-serif'],
-        sans: [`"${theme.fonts.body.family}"`, 'system-ui', 'sans-serif'],
+        display: [
+          `"${theme.fonts.display.family}"`,
+          `"${theme.fonts.display.family} Fallback"`,
+          'system-ui',
+          'sans-serif',
+        ],
+        sans: [
+          `"${theme.fonts.body.family}"`,
+          `"${theme.fonts.body.family} Fallback"`,
+          'system-ui',
+          'sans-serif',
+        ],
       },
       borderRadius: {
         card: theme.radius.card,

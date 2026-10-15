@@ -9,7 +9,7 @@ interface ProjectPreviewProps {
   sizes: string;
 }
 
-const phoneSizes = "(min-width: 1024px) 200px, 26vw";
+const phoneSizes = "(min-width: 1024px) 150px, 24vw";
 const lift =
   "motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-out";
 const containerClass =

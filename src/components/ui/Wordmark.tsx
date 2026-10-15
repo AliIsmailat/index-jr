@@ -1,12 +1,12 @@
 import { wordmark } from "../../lib/brand";
 
-export function Wordmark({
-  className = "",
-  onBand = false,
-}: {
+interface WordmarkProps {
   className?: string;
-  onBand?: boolean;
-}) {
+  tone?: "auto" | "dark";
+}
+
+export function Wordmark({ className = "", tone = "auto" }: WordmarkProps) {
+  const onDark = tone === "dark";
   return (
     <svg
       viewBox={`0 0 ${wordmark.width} ${wordmark.height}`}
@@ -16,9 +16,9 @@ export function Wordmark({
       focusable="false"
       className={className}
     >
-      <path className={onBand ? "fill-white" : "fill-text"} d={wordmark.name} />
+      <path className={onDark ? "fill-white" : "fill-text"} d={wordmark.name} />
       <path
-        className={onBand ? "fill-lime" : "fill-logo-accent"}
+        className={onDark ? "fill-lime" : "fill-logo-accent"}
         d={wordmark.accent}
       />
     </svg>

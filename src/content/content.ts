@@ -38,6 +38,8 @@ export const projectData: Record<ProjectId, ProjectData> = {
 export const siteUrl = ''
   export const social = {
     instagram: { url: 'https://www.instagram.com/index.jr/', handle: 'index.jr' },
+      github: { url: 'https://github.com/AliIsmailat', handle: 'AliIsmailat' },
+  linkedin: { url: 'https://www.linkedin.com/in/ali-ismailat-b21401231/', handle: 'Ali Ismailat' },
   }
 
 export const theme = {

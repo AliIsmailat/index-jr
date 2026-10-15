@@ -9,7 +9,7 @@ interface ProjectPreviewProps {
   sizes: string;
 }
 
-const phoneSizes = "(min-width: 1024px) 90px, 25vw";
+const phoneSizes = "(min-width: 1024px) 200px, 26vw";
 const lift =
   "motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-out";
 const containerClass =
@@ -100,37 +100,72 @@ export function ProjectPreview({ media, alt, sizes }: ProjectPreviewProps) {
 
   return (
     <div className={containerClass}>
-      <div className="relative aspect-[16/10]">
+      <div className="flex items-end justify-center gap-[5%] px-[3%] pb-[3%] pt-[6%]">
         <div
-          className={`absolute left-[11%] top-[11%] w-[66%] overflow-hidden rounded-xl border border-white/15 shadow-2xl ${lift} motion-safe:group-hover:-translate-y-1 motion-safe:group-hover:scale-[1.03]`}
+          className={`w-[68%] ${lift} motion-safe:group-hover:-translate-y-1`}
         >
-          <div
-            ref={desktopRef}
-            className="pointer-events-none aspect-[16/10] overflow-hidden"
-          >
-            <Picture
-              image={{ file: media.desktop, alt }}
-              sizes={sizes}
-              natural
-              width={1600}
-              height={3700}
+          <div className="relative rounded-t-[0.7rem] border border-white/20 bg-[#0b0c0e] p-[1.6%] pt-[2.6%] shadow-2xl">
+            <span
+              aria-hidden="true"
+              className="absolute left-1/2 top-[0.9%] h-[3px] w-[3px] -translate-x-1/2 rounded-full bg-white/25"
+            />
+            <div className="overflow-hidden rounded-[2px] bg-black">
+              <div
+                ref={desktopRef}
+                className="pointer-events-none aspect-[16/10] overflow-hidden"
+              >
+                <Picture
+                  image={{ file: media.desktop, alt }}
+                  sizes={sizes}
+                  natural
+                  width={1600}
+                  height={3700}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="relative -mx-[3%] aspect-[48/1] [border-radius:0_0_50%_50%/0_0_100%_100%] bg-gradient-to-b from-[#b4b6bc] to-[#6d6f76] shadow-[0_8px_16px_rgba(0,0,0,0.45)]">
+            <span
+              aria-hidden="true"
+              className="absolute left-1/2 top-0 h-[45%] w-[16%] -translate-x-1/2 rounded-b-md bg-black/30"
             />
           </div>
         </div>
+
         <div
-          className={`absolute bottom-[10%] right-[11%] w-[25%] overflow-hidden rounded-lg border-2 border-black shadow-2xl ${lift} motion-safe:group-hover:-translate-x-1 motion-safe:group-hover:-translate-y-3`}
+          className={`w-[24%] ${lift} motion-safe:group-hover:-translate-y-2`}
         >
-          <div
-            ref={mobileRef}
-            className="pointer-events-none aspect-[9/16] overflow-hidden"
-          >
-            <Picture
-              image={{ file: media.mobile, alt: "" }}
-              sizes={phoneSizes}
-              natural
-              width={750}
-              height={4800}
+          <div className="relative rounded-[18%/8.3%] border border-white/25 bg-[#0b0c0e] p-[4.5%] pt-[11%] shadow-2xl">
+            <span
+              aria-hidden="true"
+              className="absolute left-1/2 top-[1.5%] h-[2.8%] w-[28%] -translate-x-1/2 rounded-full bg-white/15"
             />
+            <span
+              aria-hidden="true"
+              className="absolute -left-[2.2%] top-[16%] h-[6%] w-[2.2%] rounded-l-sm bg-[#3a3c42]"
+            />
+            <span
+              aria-hidden="true"
+              className="absolute -left-[2.2%] top-[25%] h-[9%] w-[2.2%] rounded-l-sm bg-[#3a3c42]"
+            />
+            <span
+              aria-hidden="true"
+              className="absolute -right-[2.2%] top-[22%] h-[13%] w-[2.2%] rounded-r-sm bg-[#3a3c42]"
+            />
+            <div className="relative overflow-hidden [border-radius:4%_4%_14.8%_14.8%/2%_2%_6.5%_6.5%] bg-black">
+              <div
+                ref={mobileRef}
+                className="pointer-events-none aspect-[9/18] overflow-hidden"
+              >
+                <Picture
+                  image={{ file: media.mobile, alt: "" }}
+                  sizes={phoneSizes}
+                  natural
+                  width={750}
+                  height={4800}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>

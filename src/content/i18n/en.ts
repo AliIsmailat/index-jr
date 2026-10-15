@@ -7,6 +7,7 @@ export const en: Site = {
   skipLabel: 'Skip to content',
   logoAlt: 'Index JR, back to top of page',
   footerText: 'Web development for local businesses in Malmö',
+  footerPersonal: 'Personal',
 
   meta: {
     title: 'Index JR | Websites for local businesses in Malmö',
@@ -46,9 +47,8 @@ export const en: Site = {
   },
 
   hero: {
-    eyebrow: 'Web development in Malmö',
-    title: 'Websites that make more people get in touch.',
-    highlight: 'get in touch',
+    title: 'Fast websites for local businesses.',
+    highlight: 'local businesses',
     text: 'I build fast, accessible websites for local businesses, with booking, quote forms and a clear path to contact.',
     projectsLabel: 'See my projects',
     proof: [
@@ -117,7 +117,7 @@ export const en: Site = {
         category: 'Side project',
         summary: 'A small browser game that I am still working on.',
         tags: ['React', 'TypeScript'],
-        alt: 'Animation of a hammer driving a nail, showing that the project is under construction',
+        alt: 'Animation of a ball bouncing around the frame and off the text In development',
       },
     ],
   },
@@ -139,7 +139,7 @@ export const en: Site = {
       {
         icon: 'gauge',
         name: 'Fast and accessible',
-        text: 'Pages that load quickly and work for everyone, including keyboard and screen reader users.',
+        text: 'Pages that load quickly and work with keyboards and screen readers.',
       },
       {
         icon: 'phone',
@@ -154,10 +154,16 @@ export const en: Site = {
     title: 'How I work',
     stepLabel: 'Step',
     steps: [
-      { title: 'Talk', text: 'We discuss your business, your customers and what the site should do for you.' },
-      { title: 'Proposal', text: 'You get a design proposal and a fixed price before I start building.' },
+      {
+        title: 'Talk',
+        text: 'We discuss your business, your customers and what the site should do for you.',
+      },
+      {
+        title: 'Proposal',
+        text: 'You get a design proposal, a clear scope and a price before I start building.',
+      },
       { title: 'Build', text: 'I build the site and you can follow along and give feedback.' },
-      { title: 'Launch', text: 'The site goes live and I show you how to change texts and images yourself.' },
+      { title: 'Launch', text: 'We go through the site together, then it goes live.' },
     ],
   },
 
@@ -165,18 +171,21 @@ export const en: Site = {
     eyebrow: 'About',
     title: 'The person building your site',
     paragraphs: [
-      'I am a web developer in Malmö, building websites in React and TypeScript. (!)',
-      'I like taking a small business and its needs and turning them into a site that is fast, clear and easy to use.',
+      'I am a trained web developer in Malmö, building websites in React and TypeScript.',
+      'I always start from your business needs and turn them into a website that is fast, clear and works just as well on mobile as on desktop. You talk directly to me, from first idea to finished site.',
     ],
     factsTitle: 'In short',
-    facts: ['Based in Malmö, Sweden', 'React, TypeScript and Tailwind CSS', 'Fixed price on smaller sites'],
+    facts: [
+      'Based in Malmö, Sweden',
+      'React, TypeScript and Tailwind CSS',
+      'Clear price and scope upfront',
+    ],
   },
 
   contact: {
     eyebrow: 'Contact',
     title: 'Contact me',
-    intro:
-      'Tell me briefly what you need and I will get back to you. This form is a demo, so nothing is actually sent.',
+    intro: 'Tell me briefly what you need and I will get back to you.',
     emailLabel: 'Email',
     locationLabel: 'Location',
     next: {
@@ -184,7 +193,7 @@ export const en: Site = {
       items: [
         'I read your request and get back to you.',
         'We book a short call about your needs.',
-        'You get a proposal with a fixed price.',
+        'You get a proposal with a price and a clear scope.',
       ],
     },
     errorTitle: 'Please check the form',
@@ -198,7 +207,9 @@ export const en: Site = {
     topics: ['New website', 'Improve my website', 'Booking or quote form', 'Other'],
     messageHint: 'Briefly describe your business and what you need.',
     submitLabel: 'Send',
-    demoNote: 'Demo: nothing is sent and no data is saved.',
+    sendingLabel: 'Sending...',
+    sendError: 'Something went wrong. Try again or email me directly.',
+    honeypotLabel: 'Do not fill this field:',
     errors: {
       name: 'Enter your name.',
       contact: 'Enter a valid email address or phone number.',

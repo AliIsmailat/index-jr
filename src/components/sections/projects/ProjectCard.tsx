@@ -16,22 +16,22 @@ export interface ProjectView extends ProjectData {
 interface ProjectCardProps {
   project: ProjectView;
   sizes: string;
-  featured?: boolean;
+  reverse?: boolean;
 }
 
 export function ProjectCard({
   project,
   sizes,
-  featured = false,
+  reverse = false,
 }: ProjectCardProps) {
   const { projects } = useSite();
   const wip = project.status === "wip";
 
   return (
     <article
-      className={`group flex w-full flex-col overflow-hidden rounded-card bg-band-surface ${featured ? "lg:flex-row" : ""}`}
+      className={`group flex w-full flex-col overflow-hidden rounded-card bg-band-surface ${reverse ? "lg:flex-row-reverse" : "lg:flex-row"}`}
     >
-      <div className={featured ? "lg:w-[58%] lg:shrink-0" : ""}>
+      <div className="lg:w-[60%] lg:shrink-0">
         {project.media ? (
           <ProjectPreview
             media={project.media}
@@ -43,9 +43,7 @@ export function ProjectCard({
         )}
       </div>
 
-      <div
-        className={`flex flex-1 flex-col p-6 sm:p-7 ${featured ? "lg:justify-center lg:p-10" : ""}`}
-      >
+      <div className="flex flex-1 flex-col p-6 sm:p-7 lg:justify-center lg:p-10">
         <div className="flex flex-wrap items-center gap-2">
           <p className="text-sm font-semibold uppercase tracking-[0.15em] text-band-muted">
             {project.category}
@@ -57,9 +55,7 @@ export function ProjectCard({
           </span>
         </div>
 
-        <h3
-          className={`mt-3 text-2xl text-white sm:text-3xl ${featured ? "lg:text-4xl" : ""}`}
-        >
+        <h3 className="mt-3 text-2xl text-white sm:text-3xl lg:text-4xl">
           {project.name}
         </h3>
         <p className="mt-3 text-band-muted">{project.summary}</p>
@@ -75,7 +71,7 @@ export function ProjectCard({
           ))}
         </ul>
 
-        <div className={featured ? "mt-8" : "mt-auto pt-6"}>
+        <div className="mt-8">
           {project.url ? (
             <a
               href={project.url}

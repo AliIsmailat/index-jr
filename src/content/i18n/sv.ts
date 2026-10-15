@@ -7,6 +7,7 @@ export const sv = {
   skipLabel: 'Hoppa till innehållet',
   logoAlt: 'Index JR, till toppen av sidan',
   footerText: 'Webbutveckling för lokala företag i Malmö',
+  footerPersonal: 'Personligt',
 
   meta: {
     title: 'Index JR | Hemsidor för lokala företag i Malmö',
@@ -46,15 +47,14 @@ export const sv = {
   },
 
   hero: {
-    eyebrow: 'Webbutveckling i Malmö',
-    title: 'Hemsidor som får fler att höra av sig.',
-    highlight: 'höra av sig',
+    title: 'Snabba hemsidor för lokala företag.',
+    highlight: 'lokala företag',
     text: 'Jag bygger snabba och tillgängliga hemsidor för lokala företag, med bokning, offertformulär och en tydlig väg till kontakt.',
     projectsLabel: 'Se mina projekt',
     proof: [
       { value: '5', label: 'egna projekt' },
       { value: '90+', label: 'i Lighthouse på demosidorna' },
-      { value: '100', label: 'i tillgänglighet på alla fyra' },
+      { value: '100', label: 'i tillgänglighet på alla fem' },
     ],
   },
 
@@ -117,7 +117,7 @@ export const sv = {
         category: 'Eget sidoprojekt',
         summary: 'Ett litet webbläsarspel som jag fortfarande bygger på.',
         tags: ['React', 'TypeScript'],
-        alt: 'Animation av en hammare som slår i en spik, som visar att projektet är under byggnad',
+        alt: 'Animation av en boll som studsar runt i ramen och mot texten Under utveckling',
       },
     ],
   },
@@ -139,7 +139,7 @@ export const sv = {
       {
         icon: 'gauge' as IconName,
         name: 'Snabb och tillgänglig',
-        text: 'Sidor som laddar fort och fungerar för alla, även med tangentbord och skärmläsare.',
+        text: 'Sidor som laddar fort och fungerar med tangentbord och skärmläsare.',
       },
       {
         icon: 'phone' as IconName,
@@ -155,9 +155,12 @@ export const sv = {
     stepLabel: 'Steg',
     steps: [
       { title: 'Samtal', text: 'Vi pratar om ditt företag, dina kunder och vad sidan ska ge dig.' },
-      { title: 'Förslag', text: 'Du får ett designförslag och ett fast pris innan jag börjar bygga.' },
+      {
+        title: 'Förslag',
+        text: 'Du får ett designförslag, en tydlig omfattning och ett pris innan jag börjar bygga.',
+      },
       { title: 'Bygge', text: 'Jag bygger sidan och du får se den under tiden och ge synpunkter.' },
-      { title: 'Lansering', text: 'Sidan går live och jag visar hur du själv ändrar texter och bilder.' },
+      { title: 'Lansering', text: 'Vi går igenom sidan tillsammans, sedan går den live.' },
     ],
   },
 
@@ -165,18 +168,21 @@ export const sv = {
     eyebrow: 'Om mig',
     title: 'Jag som bygger din sida',
     paragraphs: [
-      'Jag är webbutvecklare i Malmö och bygger hemsidor i React och TypeScript. (!).',
-      'Jag gillar att ta ett litet företags behov och göra det till en sida som är snabb, tydlig och enkel att använda.',
+      'Jag är utbildad webbutvecklare i Malmö och bygger hemsidor i React och TypeScript.',
+      'Jag börjar alltid i ditt företags behov och gör dem till en hemsida som är snabb, tydlig och fungerar lika bra på mobilen som på datorn. Du pratar direkt med mig från första idé till färdig sida.',
     ],
     factsTitle: 'Kort om mig',
-    facts: ['Bor och arbetar i Malmö', 'React, TypeScript och Tailwind CSS', 'Fast pris på mindre sidor'],
+    facts: [
+      'Bor och arbetar i Malmö',
+      'React, TypeScript och Tailwind CSS',
+      'Tydligt pris och omfattning i förväg',
+    ],
   },
 
   contact: {
     eyebrow: 'Kontakt',
     title: 'Kontakta mig',
-    intro:
-      'Berätta kort vad du behöver så hör jag av mig. Det här formuläret är en demo, så ingenting skickas på riktigt.',
+    intro: 'Berätta kort vad du behöver så hör jag av mig.',
     emailLabel: 'E-post',
     locationLabel: 'Plats',
     next: {
@@ -184,7 +190,7 @@ export const sv = {
       items: [
         'Jag läser din förfrågan och återkommer.',
         'Vi bokar ett kort samtal om dina behov.',
-        'Du får ett förslag med fast pris.',
+        'Du får ett förslag med pris och tydlig omfattning.',
       ],
     },
     errorTitle: 'Kontrollera formuläret',
@@ -198,7 +204,9 @@ export const sv = {
     topics: ['Ny hemsida', 'Förbättra min hemsida', 'Bokning eller offertformulär', 'Annat'],
     messageHint: 'Beskriv kort ditt företag och vad du behöver.',
     submitLabel: 'Skicka',
-    demoNote: 'Demo: ingenting skickas och inga uppgifter sparas.',
+    sendingLabel: 'Skickar...',
+    sendError: 'Något gick fel. Försök igen eller mejla mig direkt.',
+    honeypotLabel: 'Fyll inte i det här fältet:',
     errors: {
       name: 'Skriv ditt namn.',
       contact: 'Skriv en giltig e-postadress eller ett telefonnummer.',

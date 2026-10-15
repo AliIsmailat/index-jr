@@ -9,11 +9,10 @@ import {
   type ContactField,
   type ContactValues,
 } from "./contact";
+import { social } from "../../../content/content";
 import { useSite } from "../../../content/i18n/lang";
 import { Icon, InstagramIcon } from "../../ui/Icons";
 import { SectionHeading } from "../../ui/SectionHeading";
-
-import { social } from "../../../content/content.ts";
 
 const labelClass =
   "block text-sm font-bold uppercase tracking-[0.12em] text-text";
@@ -61,6 +60,8 @@ export function ContactForm() {
   const [errors, setErrors] = useState<ContactErrors>({});
   const [sent, setSent] = useState<ContactValues | null>(null);
   const [attempt, setAttempt] = useState(0);
+  const [sending, setSending] = useState(false);
+  const [failed, setFailed] = useState(false);
   const summaryRef = useRef<HTMLDivElement>(null);
   const confirmRef = useRef<HTMLHeadingElement>(null);
 
@@ -75,8 +76,9 @@ export function ContactForm() {
   const update = (patch: Partial<ContactValues>) =>
     setValues((current) => ({ ...current, ...patch }));
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const form = event.currentTarget;
     const next = validateContact(values);
     setErrors(next);
 
@@ -85,12 +87,31 @@ export function ContactForm() {
       return;
     }
 
-    setSent(values);
+    setSending(true);
+    setFailed(false);
+    const data = new FormData(form);
+    data.set("topic", content.topics[Number(values.topic)]);
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(
+          data as unknown as Record<string, string>,
+        ).toString(),
+      });
+      if (!response.ok) throw new Error(String(response.status));
+      setSent(values);
+    } catch {
+      setFailed(true);
+    } finally {
+      setSending(false);
+    }
   };
 
   const reset = () => {
     setValues(emptyContact);
     setErrors({});
+    setFailed(false);
     setSent(null);
   };
 
@@ -206,7 +227,6 @@ export function ContactForm() {
                 </div>
               ))}
             </dl>
-            <p className="mt-6 text-sm text-muted">{content.demoNote}</p>
             <button
               type="button"
               onClick={reset}
@@ -217,10 +237,21 @@ export function ContactForm() {
           </div>
         ) : (
           <form
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
             noValidate
             onSubmit={onSubmit}
             className="grid gap-6 self-start rounded-card bg-surface p-6 text-text sm:p-8"
           >
+            <input type="hidden" name="form-name" value="contact" />
+            <p className="hidden">
+              <label>
+                {content.honeypotLabel}{" "}
+                <input name="bot-field" tabIndex={-1} autoComplete="off" />
+              </label>
+            </p>
             <div
               ref={summaryRef}
               tabIndex={-1}
@@ -253,6 +284,7 @@ export function ContactForm() {
             >
               <input
                 id={fieldIds.name}
+                name="name"
                 type="text"
                 autoComplete="name"
                 value={values.name}
@@ -270,6 +302,7 @@ export function ContactForm() {
             >
               <input
                 id={fieldIds.contact}
+                name="contact"
                 type="text"
                 autoComplete="email"
                 value={values.contact}
@@ -287,6 +320,7 @@ export function ContactForm() {
             >
               <select
                 id={fieldIds.topic}
+                name="topic"
                 value={values.topic}
                 onChange={(event) => update({ topic: event.target.value })}
                 aria-invalid={invalid("topic")}
@@ -310,6 +344,7 @@ export function ContactForm() {
             >
               <textarea
                 id={fieldIds.message}
+                name="message"
                 rows={5}
                 value={values.message}
                 onChange={(event) => update({ message: event.target.value })}
@@ -322,11 +357,17 @@ export function ContactForm() {
             <div>
               <button
                 type="submit"
+                disabled={sending}
                 className={`${buttonClasses()} w-full sm:w-auto`}
               >
-                {content.submitLabel}
+                {sending ? content.sendingLabel : content.submitLabel}
               </button>
-              <p className="mt-4 text-sm text-muted">{content.demoNote}</p>
+              <p
+                role="alert"
+                className="empty:hidden mt-4 border-l-4 border-text pl-3 text-sm font-bold"
+              >
+                {failed ? content.sendError : null}
+              </p>
             </div>
           </form>
         )}

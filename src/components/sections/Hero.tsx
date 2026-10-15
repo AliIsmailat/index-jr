@@ -8,16 +8,9 @@ export function Hero() {
   return (
     <section id="top" aria-labelledby="hero-rubrik" className="bg-page">
       <div className="mx-auto max-w-6xl px-4 pb-14 pt-12 sm:px-6 sm:pb-20 sm:pt-20">
-        <p className="inline-flex items-center gap-3 rounded-full border border-line bg-surface px-4 py-1.5 text-sm font-semibold">
-          <span
-            aria-hidden="true"
-            className="h-2.5 w-2.5 rounded-full bg-lime ring-2 ring-text/10"
-          />
-          {hero.eyebrow}
-        </p>
         <h1
           id="hero-rubrik"
-          className="mt-6 max-w-4xl text-[clamp(2.25rem,10.5vw,5.5rem)] leading-[0.98]"
+          className="max-w-4xl text-[clamp(2.25rem,10.5vw,5.5rem)] leading-[0.98]"
         >
           {before}
           <span className="rounded-card bg-lime px-2 text-on-lime [-webkit-box-decoration-break:clone] [box-decoration-break:clone]">

@@ -19,11 +19,7 @@ interface ProjectCardProps {
   reverse?: boolean;
 }
 
-export function ProjectCard({
-  project,
-  sizes,
-  reverse = false,
-}: ProjectCardProps) {
+export function ProjectCard({ project, sizes, reverse = false }: ProjectCardProps) {
   const { projects } = useSite();
   const wip = project.status === "wip";
 
@@ -33,11 +29,7 @@ export function ProjectCard({
     >
       <div className="lg:w-[60%] lg:shrink-0">
         {project.media ? (
-          <ProjectPreview
-            media={project.media}
-            alt={project.alt}
-            sizes={sizes}
-          />
+          <ProjectPreview media={project.media} alt={project.alt} sizes={sizes} />
         ) : (
           <ConstructionPreview alt={project.alt} />
         )}
@@ -55,9 +47,7 @@ export function ProjectCard({
           </span>
         </div>
 
-        <h3 className="mt-3 text-2xl text-white sm:text-3xl lg:text-4xl">
-          {project.name}
-        </h3>
+        <h3 className="mt-3 text-2xl text-white sm:text-3xl lg:text-4xl">{project.name}</h3>
         <p className="mt-3 text-band-muted">{project.summary}</p>
 
         <ul role="list" className="mt-4 flex flex-wrap gap-2">

@@ -1,8 +1,4 @@
-import {
-  buttonClasses,
-  type ButtonSize,
-  type ButtonVariant,
-} from "../../lib/buttonStyles";
+import { buttonClasses, type ButtonSize, type ButtonVariant } from "../../lib/buttonStyles";
 import { useSite } from "../../content/i18n/lang";
 
 interface CtaButtonProps {
@@ -11,17 +7,10 @@ interface CtaButtonProps {
   className?: string;
 }
 
-export function CtaButton({
-  variant = "solid",
-  size = "lg",
-  className = "",
-}: CtaButtonProps) {
+export function CtaButton({ variant = "solid", size = "lg", className = "" }: CtaButtonProps) {
   const site = useSite();
   return (
-    <a
-      href={site.cta.href}
-      className={`${buttonClasses(variant, size)} ${className}`}
-    >
+    <a href={site.cta.href} className={`${buttonClasses(variant, size)} ${className}`}>
       {site.cta.label}
     </a>
   );

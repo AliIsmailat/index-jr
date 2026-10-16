@@ -1,13 +1,8 @@
-import {
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  useSyncExternalStore,
-} from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { useSite } from "../../../content/i18n/lang";
+import { glyphs, type Point } from "./glyphs";
+import { PauseIcon, PlayIcon } from "../../ui/Icons";
 
-type Point = [number, number];
 type Segment = [number, number, number, number];
 
 const query = "(prefers-reduced-motion: reduce)";
@@ -19,176 +14,6 @@ const subscribeMotion = (notify: () => void) => {
 };
 
 const getReducedMotion = () => window.matchMedia(query).matches;
-
-const glyphs: Record<string, Point[][]> = {
-  C: [
-    [
-      [4, 1],
-      [3, 0],
-      [1, 0],
-      [0, 1.4],
-      [0, 4.6],
-      [1, 6],
-      [3, 6],
-      [4, 5],
-    ],
-  ],
-  D: [
-    [
-      [0, 0],
-      [0, 6],
-      [2.6, 6],
-      [4, 4.6],
-      [4, 1.4],
-      [2.6, 0],
-      [0, 0],
-    ],
-  ],
-  E: [
-    [
-      [4, 0],
-      [0, 0],
-      [0, 6],
-      [4, 6],
-    ],
-    [
-      [0, 3],
-      [3, 3],
-    ],
-  ],
-  G: [
-    [
-      [4, 1],
-      [3, 0],
-      [1, 0],
-      [0, 1.4],
-      [0, 4.6],
-      [1, 6],
-      [3, 6],
-      [4, 4.6],
-      [4, 3.2],
-      [2.2, 3.2],
-    ],
-  ],
-  I: [
-    [
-      [0, 0],
-      [4, 0],
-    ],
-    [
-      [2, 0],
-      [2, 6],
-    ],
-    [
-      [0, 6],
-      [4, 6],
-    ],
-  ],
-  K: [
-    [
-      [0, 0],
-      [0, 6],
-    ],
-    [
-      [4, 0],
-      [0, 3.4],
-    ],
-    [
-      [1.2, 2.4],
-      [4, 6],
-    ],
-  ],
-  L: [
-    [
-      [0, 0],
-      [0, 6],
-      [4, 6],
-    ],
-  ],
-  M: [
-    [
-      [0, 6],
-      [0, 0],
-      [2, 3.4],
-      [4, 0],
-      [4, 6],
-    ],
-  ],
-  N: [
-    [
-      [0, 6],
-      [0, 0],
-      [4, 6],
-      [4, 0],
-    ],
-  ],
-  O: [
-    [
-      [1, 0],
-      [3, 0],
-      [4, 1.4],
-      [4, 4.6],
-      [3, 6],
-      [1, 6],
-      [0, 4.6],
-      [0, 1.4],
-      [1, 0],
-    ],
-  ],
-  P: [
-    [
-      [0, 6],
-      [0, 0],
-      [2.8, 0],
-      [4, 1],
-      [4, 2.4],
-      [2.8, 3.4],
-      [0, 3.4],
-    ],
-  ],
-  R: [
-    [
-      [0, 6],
-      [0, 0],
-      [2.8, 0],
-      [4, 1],
-      [4, 2.2],
-      [2.8, 3.2],
-      [0, 3.2],
-    ],
-    [
-      [2.2, 3.2],
-      [4, 6],
-    ],
-  ],
-  T: [
-    [
-      [0, 0],
-      [4, 0],
-    ],
-    [
-      [2, 0],
-      [2, 6],
-    ],
-  ],
-  U: [
-    [
-      [0, 0],
-      [0, 4.5],
-      [1, 6],
-      [3, 6],
-      [4, 4.5],
-      [4, 0],
-    ],
-  ],
-  V: [
-    [
-      [0, 0],
-      [2, 6],
-      [4, 0],
-    ],
-  ],
-};
 
 const width = 160;
 const height = 100;
@@ -206,32 +31,21 @@ function buildText(label: string) {
   const scale = Math.min(2.4, 128 / longestWidth);
   const lineHeight = glyphHeight * scale;
   const lineGap = 3 * scale;
-  const top =
-    (height - (words.length * lineHeight + (words.length - 1) * lineGap)) / 2;
+  const top = (height - (words.length * lineHeight + (words.length - 1) * lineGap)) / 2;
   const paths: string[] = [];
   const segments: Segment[] = [];
 
   words.forEach((word, row) => {
-    const rowWidth =
-      (word.length * glyphWidth + (word.length - 1) * glyphGap) * scale;
+    const rowWidth = (word.length * glyphWidth + (word.length - 1) * glyphGap) * scale;
     const left = (width - rowWidth) / 2;
     const y0 = top + row * (lineHeight + lineGap);
     [...word].forEach((letter, column) => {
       const x0 = left + column * (glyphWidth + glyphGap) * scale;
       for (const stroke of glyphs[letter] ?? []) {
-        const points = stroke.map(
-          ([x, y]): Point => [x0 + x * scale, y0 + y * scale],
-        );
-        paths.push(
-          `M${points.map(([x, y]) => `${x.toFixed(2)} ${y.toFixed(2)}`).join("L")}`,
-        );
+        const points = stroke.map(([x, y]): Point => [x0 + x * scale, y0 + y * scale]);
+        paths.push(`M${points.map(([x, y]) => `${x.toFixed(2)} ${y.toFixed(2)}`).join("L")}`);
         for (let i = 1; i < points.length; i++) {
-          segments.push([
-            points[i - 1][0],
-            points[i - 1][1],
-            points[i][0],
-            points[i][1],
-          ]);
+          segments.push([points[i - 1][0], points[i - 1][1], points[i][0], points[i][1]]);
         }
       }
     });
@@ -240,43 +54,12 @@ function buildText(label: string) {
   return { paths, segments, strokeWidth: scale };
 }
 
-function PauseIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-      className="h-4 w-4"
-    >
-      <rect x="6" y="5" width="4" height="14" rx="1" />
-      <rect x="14" y="5" width="4" height="14" rx="1" />
-    </svg>
-  );
-}
-
-function PlayIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-      className="h-4 w-4"
-    >
-      <path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z" />
-    </svg>
-  );
-}
-
 export function ConstructionPreview({ alt }: { alt: string }) {
   const { projects } = useSite();
   const rootRef = useRef<HTMLDivElement>(null);
   const ballRef = useRef<SVGCircleElement>(null);
   const ball = useRef({ ...start });
-  const reducedMotion = useSyncExternalStore(
-    subscribeMotion,
-    getReducedMotion,
-    () => false,
-  );
+  const reducedMotion = useSyncExternalStore(subscribeMotion, getReducedMotion, () => false);
   const [userPaused, setUserPaused] = useState<boolean | null>(null);
   const [visible, setVisible] = useState(false);
   const paused = userPaused ?? reducedMotion;
@@ -285,9 +68,7 @@ export function ConstructionPreview({ alt }: { alt: string }) {
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
-    const observer = new IntersectionObserver(([entry]) =>
-      setVisible(entry.isIntersecting),
-    );
+    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting));
     observer.observe(root);
     return () => observer.disconnect();
   }, []);
@@ -303,10 +84,8 @@ export function ConstructionPreview({ alt }: { alt: string }) {
       state.vx -= 2 * dot * nx;
       state.vy -= 2 * dot * ny;
       const minimum = speed * 0.25;
-      if (Math.abs(state.vx) < minimum)
-        state.vx = Math.sign(state.vx || 1) * minimum;
-      if (Math.abs(state.vy) < minimum)
-        state.vy = Math.sign(state.vy || 1) * minimum;
+      if (Math.abs(state.vx) < minimum) state.vx = Math.sign(state.vx || 1) * minimum;
+      if (Math.abs(state.vy) < minimum) state.vy = Math.sign(state.vy || 1) * minimum;
       const scale = speed / Math.hypot(state.vx, state.vy);
       state.vx *= scale;
       state.vy *= scale;
@@ -334,10 +113,7 @@ export function ConstructionPreview({ alt }: { alt: string }) {
         const dy = y2 - y1;
         const t = Math.max(
           0,
-          Math.min(
-            1,
-            ((state.x - x1) * dx + (state.y - y1) * dy) / (dx * dx + dy * dy),
-          ),
+          Math.min(1, ((state.x - x1) * dx + (state.y - y1) * dy) / (dx * dx + dy * dy)),
         );
         const px = x1 + t * dx;
         const py = y1 + t * dy;
@@ -390,13 +166,7 @@ export function ConstructionPreview({ alt }: { alt: string }) {
             <path key={d} d={d} />
           ))}
         </g>
-        <circle
-          ref={ballRef}
-          cx={start.x}
-          cy={start.y}
-          r={ballRadius}
-          className="fill-lime"
-        />
+        <circle ref={ballRef} cx={start.x} cy={start.y} r={ballRadius} className="fill-lime" />
       </svg>
       <button
         type="button"

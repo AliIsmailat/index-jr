@@ -17,10 +17,7 @@ export function Wordmark({ className = "", tone = "auto" }: WordmarkProps) {
       className={className}
     >
       <path className={onDark ? "fill-white" : "fill-text"} d={wordmark.name} />
-      <path
-        className={onDark ? "fill-lime" : "fill-logo-accent"}
-        d={wordmark.accent}
-      />
+      <path className={onDark ? "fill-lime" : "fill-logo-accent"} d={wordmark.accent} />
     </svg>
   );
 }

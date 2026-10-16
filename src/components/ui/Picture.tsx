@@ -3,42 +3,30 @@ interface ImageEntry {
   alt: string;
 }
 
-const srcSets = import.meta.glob<string>(
-  "/src/assets/**/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}",
-  {
-    eager: true,
-    import: "default",
-    query: {
-      w: "240;480;800;1200;1600",
-      format: "webp",
-      as: "srcset",
-      withoutEnlargement: true,
-    },
+const srcSets = import.meta.glob<string>("/src/assets/**/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}", {
+  eager: true,
+  import: "default",
+  query: {
+    w: "240;480;800;1200;1600",
+    format: "webp",
+    as: "srcset",
+    withoutEnlargement: true,
   },
-);
+});
 
-const sources = import.meta.glob<string>(
-  "/src/assets/**/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}",
-  {
-    eager: true,
-    import: "default",
-    query: { w: "1600", format: "webp", withoutEnlargement: true },
-  },
-);
+const sources = import.meta.glob<string>("/src/assets/**/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}", {
+  eager: true,
+  import: "default",
+  query: { w: "1600", format: "webp", withoutEnlargement: true },
+});
 
-const placeholders = import.meta.glob<string>(
-  "/src/assets/placeholders/*.svg",
-  {
-    eager: true,
-    import: "default",
-    query: "?url",
-  },
-);
+const placeholders = import.meta.glob<string>("/src/assets/placeholders/*.svg", {
+  eager: true,
+  import: "default",
+  query: "?url",
+});
 
-function findByName(
-  map: Record<string, string>,
-  file: string,
-): string | undefined {
+function findByName(map: Record<string, string>, file: string): string | undefined {
   const wanted = file.toLowerCase();
   const path = Object.keys(map).find(
     (key) =>
@@ -76,13 +64,7 @@ export function Picture({
   const url = src ?? placeholder;
 
   if (!url) {
-    return (
-      <div
-        role="img"
-        aria-label={image.alt}
-        className="h-full w-full bg-line"
-      />
-    );
+    return <div role="img" aria-label={image.alt} className="h-full w-full bg-line" />;
   }
 
   return (

@@ -6,10 +6,7 @@ const paths: Record<IconName, string[]> = {
   gauge: ["M4 18a8 8 0 1 1 16 0", "M12 18l4-6"],
   phone: ["M7 3h10v18H7z", "M11 18h2"],
   mail: ["M3 6h18v12H3z", "M3 7l9 7 9-7"],
-  pin: [
-    "M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11z",
-    "M12 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4z",
-  ],
+  pin: ["M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11z", "M12 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"],
   check: ["M5 12l5 5 9-10"],
   arrow: ["M7 17 17 7", "M8 7h9v9"],
 };
@@ -44,18 +41,9 @@ const instagramPaths = [
   "M20.8,4h-9.5C7.2,4,4,7.2,4,11.2v9.5c0,4,3.2,7.2,7.2,7.2h9.5c4,0,7.2-3.2,7.2-7.2v-9.5C28,7.2,24.8,4,20.8,4z M25.7,20.8c0,2.7-2.2,5-5,5h-9.5c-2.7,0-5-2.2-5-5v-9.5c0-2.7,2.2-5,5-5h9.5c2.7,0,5,2.2,5,5V20.8z",
 ];
 
-export function InstagramIcon({
-  className = "h-6 w-6",
-}: {
-  className?: string;
-}) {
+export function InstagramIcon({ className = "h-6 w-6" }: { className?: string }) {
   return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 32 32"
-      fill="currentColor"
-      className={className}
-    >
+    <svg aria-hidden="true" viewBox="0 0 32 32" fill="currentColor" className={className}>
       {instagramPaths.map((d) => (
         <path key={d} d={d} />
       ))}
@@ -71,30 +59,95 @@ const linkedinPath =
 
 export function GithubIcon({ className = "h-6 w-6" }: { className?: string }) {
   return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      className={className}
-    >
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" className={className}>
       <path d={githubPath} />
     </svg>
   );
 }
 
-export function LinkedinIcon({
-  className = "h-6 w-6",
-}: {
-  className?: string;
-}) {
+export function LinkedinIcon({ className = "h-6 w-6" }: { className?: string }) {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <path d={linkedinPath} />
+    </svg>
+  );
+}
+
+const arrowLeftCirclePath =
+  "M281,1106 L270.414,1106 L274.536,1110.12 C274.926,1110.51 274.926,1111.15 274.536,1111.54 C274.145,1111.93 273.512,1111.93 273.121,1111.54 L267.464,1105.88 C267.225,1105.64 267.15,1105.31 267.205,1105 C267.15,1104.69 267.225,1104.36 267.464,1104.12 L273.121,1098.46 C273.512,1098.07 274.145,1098.07 274.536,1098.46 C274.926,1098.86 274.926,1099.49 274.536,1099.88 L270.414,1104 L281,1104 C281.552,1104 282,1104.45 282,1105 C282,1105.55 281.552,1106 281,1106 L281,1106 Z M274,1089 C265.164,1089 258,1096.16 258,1105 C258,1113.84 265.164,1121 274,1121 C282.836,1121 290,1113.84 290,1105 C290,1096.16 282.836,1089 274,1089 L274,1089 Z";
+
+export function ArrowLeftCircleIcon({ className = "h-6 w-6" }: { className?: string }) {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 32 32" fill="currentColor" className={className}>
+      <path transform="translate(-258 -1089)" d={arrowLeftCirclePath} />
+    </svg>
+  );
+}
+
+export function MenuIcon({ open, className = "h-6 w-6" }: { open: boolean; className?: string }) {
   return (
     <svg
       aria-hidden="true"
       viewBox="0 0 24 24"
-      fill="currentColor"
       className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
     >
-      <path d={linkedinPath} />
+      {open ? <path d="M6 6L18 18M18 6L6 18" /> : <path d="M4 8H20M4 16H20" />}
+    </svg>
+  );
+}
+
+export function SunIcon({ className = "h-5 w-5" }: { className?: string }) {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4" />
+    </svg>
+  );
+}
+
+export function MoonIcon({ className = "h-5 w-5" }: { className?: string }) {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z" />
+    </svg>
+  );
+}
+
+export function PauseIcon({ className = "h-4 w-4" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+      <rect x="6" y="5" width="4" height="14" rx="1" />
+      <rect x="14" y="5" width="4" height="14" rx="1" />
+    </svg>
+  );
+}
+
+export function PlayIcon({ className = "h-4 w-4" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+      <path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z" />
     </svg>
   );
 }

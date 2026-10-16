@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { About } from "../components/sections/About";
 import { ContactForm } from "../components/sections/contact/ContactForm";
 import { Footer } from "../components/layout/Footer";
@@ -6,10 +7,23 @@ import { Hero } from "../components/sections/Hero";
 import { Process } from "../components/sections/Process";
 import { Projects } from "../components/sections/projects/Projects";
 import { Services } from "../components/sections/Services";
-import { useSite } from "../content/i18n/lang";
+import { useSite, type Page } from "../content/i18n/lang";
+import { Legal } from "../components/sections/legal/Legal";
 
-export default function App() {
+export default function App({ page }: { page: Page }) {
   const site = useSite();
+
+  useEffect(() => {
+    const scrollToHash = () => {
+      const id = decodeURIComponent(window.location.hash.slice(1));
+      if (!id) return;
+      document.getElementById(id)?.scrollIntoView({ behavior: "instant" as ScrollBehavior });
+    };
+    scrollToHash();
+    document.fonts?.ready.then(scrollToHash);
+    window.addEventListener("load", scrollToHash, { once: true });
+    return () => window.removeEventListener("load", scrollToHash);
+  }, []);
 
   return (
     <>
@@ -21,12 +35,18 @@ export default function App() {
       </a>
       <Header />
       <main id="innehall">
-        <Hero />
-        <Projects />
-        <Services />
-        <Process />
-        <About />
-        <ContactForm />
+        {page === "legal" ? (
+          <Legal />
+        ) : (
+          <>
+            <Hero />
+            <Projects />
+            <Services />
+            <Process />
+            <About />
+            <ContactForm />
+          </>
+        )}
       </main>
       <Footer />
     </>

@@ -10,10 +10,8 @@ interface ProjectPreviewProps {
 }
 
 const phoneSizes = "(min-width: 1024px) 150px, 24vw";
-const lift =
-  "motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-out";
-const containerClass =
-  "select-none overflow-hidden bg-gradient-to-br from-band-surface to-band";
+const lift = "motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-out";
+const containerClass = "select-none overflow-hidden bg-gradient-to-br from-band-surface to-band";
 
 function Restart() {
   return (
@@ -62,9 +60,7 @@ export function ProjectPreview({ media, alt, sizes }: ProjectPreviewProps) {
       (node): node is HTMLDivElement => node !== null,
     );
     const measure = () => {
-      const counts = nodes.map((node) =>
-        Math.ceil(node.scrollHeight / node.clientHeight - 0.02),
-      );
+      const counts = nodes.map((node) => Math.ceil(node.scrollHeight / node.clientHeight - 0.02));
       setSteps(Math.max(1, ...counts));
     };
     const observer = new ResizeObserver(measure);
@@ -81,8 +77,7 @@ export function ProjectPreview({ media, alt, sizes }: ProjectPreviewProps) {
   const goTo = (index: number) => {
     const target = Math.min(Math.max(index, 0), steps - 1);
     setStep(target);
-    const behavior = window.matchMedia("(prefers-reduced-motion: reduce)")
-      .matches
+    const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches
       ? "auto"
       : "smooth";
     for (const node of [desktopRef.current, mobileRef.current]) {
@@ -101,19 +96,14 @@ export function ProjectPreview({ media, alt, sizes }: ProjectPreviewProps) {
   return (
     <div className={containerClass}>
       <div className="flex items-end justify-center gap-[5%] px-[3%] pb-[3%] pt-[6%]">
-        <div
-          className={`w-[68%] ${lift} motion-safe:group-hover:-translate-y-1`}
-        >
+        <div className={`w-[68%] ${lift} motion-safe:group-hover:-translate-y-1`}>
           <div className="relative rounded-t-[0.7rem] border border-white/20 bg-[#0b0c0e] p-[1.6%] pt-[2.6%] shadow-2xl">
             <span
               aria-hidden="true"
               className="absolute left-1/2 top-[0.9%] h-[3px] w-[3px] -translate-x-1/2 rounded-full bg-white/25"
             />
             <div className="overflow-hidden rounded-[2px] bg-black">
-              <div
-                ref={desktopRef}
-                className="pointer-events-none aspect-[16/10] overflow-hidden"
-              >
+              <div ref={desktopRef} className="pointer-events-none aspect-[16/10] overflow-hidden">
                 <Picture
                   image={{ file: media.desktop, alt }}
                   sizes={sizes}
@@ -132,9 +122,7 @@ export function ProjectPreview({ media, alt, sizes }: ProjectPreviewProps) {
           </div>
         </div>
 
-        <div
-          className={`w-[24%] ${lift} motion-safe:group-hover:-translate-y-2`}
-        >
+        <div className={`w-[24%] ${lift} motion-safe:group-hover:-translate-y-2`}>
           <div className="relative rounded-[18%/8.3%] border border-white/25 bg-[#0b0c0e] p-[4.5%] pt-[11%] shadow-2xl">
             <span
               aria-hidden="true"
@@ -153,10 +141,7 @@ export function ProjectPreview({ media, alt, sizes }: ProjectPreviewProps) {
               className="absolute -right-[2.2%] top-[22%] h-[13%] w-[2.2%] rounded-r-sm bg-[#3a3c42]"
             />
             <div className="relative overflow-hidden [border-radius:4%_4%_14.8%_14.8%/2%_2%_6.5%_6.5%] bg-black">
-              <div
-                ref={mobileRef}
-                className="pointer-events-none aspect-[9/18] overflow-hidden"
-              >
+              <div ref={mobileRef} className="pointer-events-none aspect-[9/18] overflow-hidden">
                 <Picture
                   image={{ file: media.mobile, alt: "" }}
                   sizes={phoneSizes}
@@ -201,9 +186,7 @@ export function ProjectPreview({ media, alt, sizes }: ProjectPreviewProps) {
               type="button"
               className={arrow}
               onClick={() => goTo(atEnd ? 0 : current + 1)}
-              aria-label={
-                atEnd ? projects.previewRestart : projects.previewNext
-              }
+              aria-label={atEnd ? projects.previewRestart : projects.previewNext}
             >
               {atEnd ? <Restart /> : <Chevron direction="right" />}
             </button>

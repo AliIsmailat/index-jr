@@ -18,9 +18,7 @@ export function Hero() {
           </span>
           {after}
         </h1>
-        <p className="mt-6 max-w-xl text-lg text-muted sm:text-xl">
-          {hero.text}
-        </p>
+        <p className="mt-6 max-w-xl text-lg text-muted sm:text-xl">{hero.text}</p>
 
         <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
           <CtaButton className="w-full sm:w-auto" />
@@ -36,9 +34,7 @@ export function Hero() {
           {hero.proof.map((item) => (
             <div key={item.label} className="flex flex-col-reverse">
               <dt className="mt-1 text-muted">{item.label}</dt>
-              <dd className="font-display text-5xl font-extrabold leading-none">
-                {item.value}
-              </dd>
+              <dd className="font-display text-5xl font-extrabold leading-none">{item.value}</dd>
             </div>
           ))}
         </dl>

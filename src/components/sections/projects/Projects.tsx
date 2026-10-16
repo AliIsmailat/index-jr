@@ -6,11 +6,7 @@ import { SectionHeading } from "../../ui/SectionHeading";
 export function Projects() {
   const { projects } = useSite();
   return (
-    <section
-      id="projekt"
-      aria-labelledby="projekt-rubrik"
-      className="bg-band py-16 sm:py-24"
-    >
+    <section id="projekt" aria-labelledby="projekt-rubrik" className="bg-band py-16 sm:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeading
           id="projekt-rubrik"
@@ -18,9 +14,7 @@ export function Projects() {
           title={projects.title}
           tone="dark"
         />
-        <p className="mt-6 max-w-2xl text-lg text-band-muted">
-          {projects.intro}
-        </p>
+        <p className="mt-6 max-w-2xl text-lg text-band-muted">{projects.intro}</p>
 
         <ul role="list" className="mt-12 grid gap-6">
           {projects.items.map((item, index) => (

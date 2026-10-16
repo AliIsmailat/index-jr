@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { social } from "../../content/content";
-import { useSite } from "../../content/i18n/lang";
+import { useLang, useSite } from "../../content/i18n/lang";
 import { GithubIcon, InstagramIcon, LinkedinIcon } from "../ui/Icons";
 import { Wordmark } from "../ui/Wordmark";
 
@@ -8,6 +8,7 @@ const linkClass = "inline-flex items-center gap-2 text-white hover:text-lime";
 
 export function Footer() {
   const site = useSite();
+  const { lang } = useLang();
   const [year] = useState(() => new Date().getFullYear());
   const newTab = `, ${site.projects.newTabLabel}`;
 
@@ -28,19 +29,17 @@ export function Footer() {
               className={linkClass}
             >
               <InstagramIcon className="h-5 w-5" />
-              <span className="sr-only">Instagram: </span>@
-              {social.instagram.handle}
+              <span className="sr-only">Instagram: </span>@{social.instagram.handle}
               <span className="sr-only">{newTab}</span>
             </a>
           </p>
         </div>
 
         <div className="flex flex-col gap-2 md:border-l md:border-white/15 md:pl-16">
-          <p className="text-sm font-semibold uppercase tracking-[0.15em] text-band-muted">
+          <p className="border-b border-white/15 pb-3 text-sm font-semibold uppercase tracking-[0.15em] text-band-muted">
             {site.footerPersonal}
           </p>
-          <p className="font-display text-2xl font-extrabold">{site.owner}</p>
-          <ul role="list" className="mt-2 grid gap-2">
+          <ul role="list" className="mt-3 grid gap-2">
             <li>
               <a
                 href={social.github.url}
@@ -68,9 +67,15 @@ export function Footer() {
           </ul>
         </div>
 
-        <p className="text-sm text-band-muted md:col-span-2">
-          &copy; <span suppressHydrationWarning>{year}</span> {site.owner}
-        </p>
+        <div className="flex flex-col gap-2 text-sm text-band-muted md:col-span-2">
+          <a href={site.legal.href} className="w-fit underline underline-offset-4 hover:text-lime">
+            {site.legal.footerLink}
+          </a>
+          <p>
+            &copy; <span suppressHydrationWarning>{year}</span> {site.brand}.{" "}
+            {lang === "sv" ? "Alla rättigheter förbehållna." : "All rights reserved."}
+          </p>
+        </div>
       </div>
     </footer>
   );

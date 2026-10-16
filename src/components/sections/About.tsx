@@ -5,18 +5,10 @@ import { SectionHeading } from "../ui/SectionHeading";
 export function About() {
   const { about } = useSite();
   return (
-    <section
-      id="om-mig"
-      aria-labelledby="om-mig-rubrik"
-      className="bg-page py-16 sm:py-24"
-    >
+    <section id="om-mig" aria-labelledby="om-mig-rubrik" className="bg-page py-16 sm:py-24">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
         <div>
-          <SectionHeading
-            id="om-mig-rubrik"
-            eyebrow={about.eyebrow}
-            title={about.title}
-          />
+          <SectionHeading id="om-mig-rubrik" eyebrow={about.eyebrow} title={about.title} />
           <div className="mt-8 grid max-w-xl gap-4 text-lg text-muted">
             {about.paragraphs.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>

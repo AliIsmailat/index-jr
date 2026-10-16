@@ -12,17 +12,17 @@
       /*themeCss*/
     </style>
     <script>
-      ;(function () {
-        var theme = 'light'
+      (function () {
+        var theme = "light";
         try {
-          var stored = localStorage.getItem('theme')
-          if (stored === 'light' || stored === 'dark') theme = stored
-          else if (matchMedia('(prefers-color-scheme: dark)').matches) theme = 'dark'
+          var stored = localStorage.getItem("theme");
+          if (stored === "light" || stored === "dark") theme = stored;
+          else if (matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark";
         } catch (error) {
-          theme = 'light'
+          theme = "light";
         }
-        document.documentElement.dataset.theme = theme
-      })()
+        document.documentElement.dataset.theme = theme;
+      })();
     </script>
     {{fontPreloads}}
   </head>

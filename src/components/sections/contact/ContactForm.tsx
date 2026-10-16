@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import type { FormEvent, ReactNode } from "react";
+import type { FormEvent } from "react";
 import { buttonClasses } from "../../../lib/buttonStyles";
 import {
   emptyContact,
@@ -12,46 +12,9 @@ import {
 import { social } from "../../../content/content";
 import { useSite } from "../../../content/i18n/lang";
 import { Icon, InstagramIcon } from "../../ui/Icons";
+import { ContactConfirmation } from "./ContactConfirmation";
+import { Field, inputClass } from "./FormField";
 import { SectionHeading } from "../../ui/SectionHeading";
-
-const labelClass =
-  "block text-sm font-bold uppercase tracking-[0.12em] text-text";
-
-const inputClass =
-  "mt-2 block w-full rounded-xl border-2 border-text/30 bg-page px-4 py-3 text-base text-text placeholder:text-muted focus:border-text aria-[invalid=true]:border-text aria-[invalid=true]:bg-lime/30";
-
-interface FieldProps {
-  field: ContactField;
-  label: string;
-  error?: string;
-  hint?: string;
-  children: ReactNode;
-}
-
-function Field({ field, label, error, hint, children }: FieldProps) {
-  const id = fieldIds[field];
-  return (
-    <div>
-      <label htmlFor={id} className={labelClass}>
-        {label}
-      </label>
-      {children}
-      {hint && (
-        <p id={`${id}-tips`} className="mt-2 text-sm text-muted">
-          {hint}
-        </p>
-      )}
-      {error && (
-        <p
-          id={`${id}-fel`}
-          className="mt-2 border-l-4 border-text pl-3 text-sm font-bold"
-        >
-          {error}
-        </p>
-      )}
-    </div>
-  );
-}
 
 export function ContactForm() {
   const site = useSite();
@@ -95,9 +58,7 @@ export function ContactForm() {
       const response = await fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(
-          data as unknown as Record<string, string>,
-        ).toString(),
+        body: new URLSearchParams(data as unknown as Record<string, string>).toString(),
       });
       if (!response.ok) throw new Error(String(response.status));
       setSent(values);
@@ -116,15 +77,11 @@ export function ContactForm() {
   };
 
   const errorFields = Object.keys(errors) as ContactField[];
-  const message = (field: ContactField) =>
-    errors[field] ? content.errors[field] : undefined;
+  const message = (field: ContactField) => (errors[field] ? content.errors[field] : undefined);
 
   const describedBy = (field: ContactField, hint = false) => {
     const id = fieldIds[field];
-    const parts = [
-      hint ? `${id}-tips` : "",
-      errors[field] ? `${id}-fel` : "",
-    ].filter(Boolean);
+    const parts = [hint ? `${id}-tips` : "", errors[field] ? `${id}-fel` : ""].filter(Boolean);
     return parts.length > 0 ? parts.join(" ") : undefined;
   };
 
@@ -144,9 +101,7 @@ export function ContactForm() {
             title={content.title}
             tone="dark"
           />
-          <p className="mt-6 max-w-md text-lg text-band-muted">
-            {content.intro}
-          </p>
+          <p className="mt-6 max-w-md text-lg text-band-muted">{content.intro}</p>
 
           <h3 className="mt-10 text-xl text-white">{content.next.title}</h3>
           <ul role="list" className="mt-4 grid gap-3">
@@ -160,17 +115,11 @@ export function ContactForm() {
             ))}
           </ul>
 
-          <ul
-            role="list"
-            className="mt-10 grid gap-3 border-t border-white/15 pt-8"
-          >
+          <ul role="list" className="mt-10 grid gap-3 border-t border-white/15 pt-8">
             <li className="flex items-center gap-3 text-white">
               <Icon name="mail" className="h-5 w-5 text-lime" />
               <span className="sr-only">{content.emailLabel}: </span>
-              <a
-                href={`mailto:${site.email}`}
-                className="font-semibold hover:text-lime"
-              >
+              <a href={`mailto:${site.email}`} className="font-semibold hover:text-lime">
                 {site.email}
               </a>
             </li>
@@ -196,45 +145,7 @@ export function ContactForm() {
         </div>
 
         {sent ? (
-          <div className="self-start rounded-card bg-surface p-6 text-text sm:p-8">
-            <h3 ref={confirmRef} tabIndex={-1} className="text-2xl sm:text-3xl">
-              {content.confirm.title}
-            </h3>
-            <p className="mt-3 text-lg text-muted">
-              {content.confirm.thanks} {sent.name.trim()}!{" "}
-              {content.confirm.message}
-            </p>
-            <p className="mt-6 text-sm font-bold uppercase tracking-[0.12em]">
-              {content.confirm.summary}
-            </p>
-            <dl className="mt-3 divide-y divide-line border-y border-line">
-              {(
-                [
-                  [content.labels.name, sent.name.trim()],
-                  [content.labels.contact, sent.contact.trim()],
-                  [content.labels.topic, content.topics[Number(sent.topic)]],
-                  [content.labels.message, sent.message.trim()],
-                ] as [string, string][]
-              ).map(([label, value]) => (
-                <div
-                  key={label}
-                  className="grid gap-1 py-3 sm:grid-cols-[8rem_1fr] sm:gap-4"
-                >
-                  <dt className="text-muted">{label}</dt>
-                  <dd className="font-semibold [overflow-wrap:anywhere]">
-                    {value}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-            <button
-              type="button"
-              onClick={reset}
-              className={`${buttonClasses("outline")} mt-6`}
-            >
-              {content.confirm.again}
-            </button>
-          </div>
+          <ContactConfirmation sent={sent} confirmRef={confirmRef} onReset={reset} />
         ) : (
           <form
             name="contact"
@@ -248,16 +159,10 @@ export function ContactForm() {
             <input type="hidden" name="form-name" value="contact" />
             <p className="hidden">
               <label>
-                {content.honeypotLabel}{" "}
-                <input name="bot-field" tabIndex={-1} autoComplete="off" />
+                {content.honeypotLabel} <input name="bot-field" tabIndex={-1} autoComplete="off" />
               </label>
             </p>
-            <div
-              ref={summaryRef}
-              tabIndex={-1}
-              role="alert"
-              className="empty:hidden"
-            >
+            <div ref={summaryRef} tabIndex={-1} role="alert" className="empty:hidden">
               {errorFields.length > 0 && (
                 <div className="rounded-xl border-2 border-text bg-lime/30 p-5">
                   <p className="font-display text-xl">{content.errorTitle}</p>
@@ -277,11 +182,7 @@ export function ContactForm() {
               )}
             </div>
 
-            <Field
-              field="name"
-              label={content.labels.name}
-              error={message("name")}
-            >
+            <Field field="name" label={content.labels.name} error={message("name")}>
               <input
                 id={fieldIds.name}
                 name="name"
@@ -295,11 +196,7 @@ export function ContactForm() {
               />
             </Field>
 
-            <Field
-              field="contact"
-              label={content.labels.contact}
-              error={message("contact")}
-            >
+            <Field field="contact" label={content.labels.contact} error={message("contact")}>
               <input
                 id={fieldIds.contact}
                 name="contact"
@@ -313,11 +210,7 @@ export function ContactForm() {
               />
             </Field>
 
-            <Field
-              field="topic"
-              label={content.labels.topic}
-              error={message("topic")}
-            >
+            <Field field="topic" label={content.labels.topic} error={message("topic")}>
               <select
                 id={fieldIds.topic}
                 name="topic"
@@ -362,6 +255,13 @@ export function ContactForm() {
               >
                 {sending ? content.sendingLabel : content.submitLabel}
               </button>
+              <p className="mt-4 text-sm text-muted">
+                {content.privacyNote.before}
+                <a href={site.legal.href} className="font-semibold underline underline-offset-4">
+                  {content.privacyNote.link}
+                </a>
+                {content.privacyNote.after}
+              </p>
               <p
                 role="alert"
                 className="empty:hidden mt-4 border-l-4 border-text pl-3 text-sm font-bold"

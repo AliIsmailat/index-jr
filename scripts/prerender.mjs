@@ -29,6 +29,7 @@ const pages = [
     route: "/en/privacy/",
     locale: "en_US",
   },
+  { lang: "sv", page: "notfound", file: "404.html", locale: "sv_SE", noindex: true },
 ];
 
 const alternatesFor = (page) => {
@@ -47,13 +48,15 @@ for (const page of pages) {
   const title = escapeHtml(meta.title);
   const description = escapeHtml(meta.description);
 
+  const indexable = !page.noindex;
   const head = [
+    ...(indexable ? [] : [`<meta name="robots" content="noindex" />`]),
     `<meta property="og:type" content="website" />`,
     `<meta property="og:title" content="${title}" />`,
     `<meta property="og:description" content="${description}" />`,
     `<meta property="og:locale" content="${page.locale}" />`,
     `<meta name="twitter:card" content="summary" />`,
-    ...(base
+    ...(base && indexable
       ? [
           `<link rel="canonical" href="${base}${page.route}" />`,
           `<meta property="og:url" content="${base}${page.route}" />`,
@@ -85,6 +88,7 @@ await writeFile(path.join(dist, "robots.txt"), `${robots.join("\n")}\n`);
 
 if (base) {
   const urls = pages
+    .filter((page) => !page.noindex)
     .map(
       (page) =>
         `  <url>\n    <loc>${base}${page.route}</loc>\n${pages

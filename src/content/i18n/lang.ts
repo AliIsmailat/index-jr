@@ -3,9 +3,10 @@ import { en } from "./en";
 import { sv, type Site } from "./sv";
 
 export type Lang = "sv" | "en";
-export type Page = "home" | "legal";
+export type RoutedPage = "home" | "legal";
+export type Page = RoutedPage | "notfound";
 
-export const routes: Record<Lang, Record<Page, string>> = {
+export const routes: Record<Lang, Record<RoutedPage, string>> = {
   sv: { home: "/", legal: "/integritet/" },
   en: { home: "/en/", legal: "/en/privacy/" },
 };
@@ -28,7 +29,15 @@ export const langFromPath = (): Lang => (window.location.pathname.startsWith("/e
 
 export const pageFromPath = (): Page => {
   const path = window.location.pathname.replace(/\/?$/, "/");
-  return path === routes.sv.legal || path === routes.en.legal ? "legal" : "home";
+  if (path === routes.sv.legal || path === routes.en.legal) return "legal";
+  if (path === routes.sv.home || path === routes.en.home) return "home";
+  return "notfound";
+};
+
+export const pageMeta = (site: Site, page: Page) => {
+  if (page === "legal") return site.legal.meta;
+  if (page === "notfound") return site.notFound.meta;
+  return site.meta;
 };
 
 export const useSite = () => useContext(LangContext).site;

@@ -4,11 +4,12 @@ import { ContactForm } from "../components/sections/contact/ContactForm";
 import { Footer } from "../components/layout/Footer";
 import { Header } from "../components/layout/Header";
 import { Hero } from "../components/sections/Hero";
+import { Legal } from "../components/sections/legal/Legal";
+import { NotFound } from "../components/sections/notfound/NotFound";
 import { Process } from "../components/sections/Process";
 import { Projects } from "../components/sections/projects/Projects";
 import { Services } from "../components/sections/Services";
 import { useSite, type Page } from "../content/i18n/lang";
-import { Legal } from "../components/sections/legal/Legal";
 
 export default function App({ page }: { page: Page }) {
   const site = useSite();
@@ -35,9 +36,9 @@ export default function App({ page }: { page: Page }) {
       </a>
       <Header />
       <main id="innehall">
-        {page === "legal" ? (
-          <Legal />
-        ) : (
+        {page === "legal" && <Legal />}
+        {page === "notfound" && <NotFound />}
+        {page === "home" && (
           <>
             <Hero />
             <Projects />

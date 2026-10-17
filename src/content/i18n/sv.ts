@@ -180,6 +180,16 @@ export const sv = {
     ],
   },
 
+  notFound: {
+    eyebrow: "404",
+    title: "Sidan finns inte",
+    text: "Länken kan vara felskriven, eller så har sidan flyttats. Gå tillbaka till startsidan så hittar du rätt.",
+    cta: "Till startsidan",
+    meta: {
+      title: "Sidan finns inte | Index JR",
+      description: "Sidan du letar efter finns inte.",
+    },
+  },
   legal: {
     eyebrow: "Integritet",
     title: "Integritet och villkor",

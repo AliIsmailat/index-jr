@@ -183,6 +183,16 @@ export const en: Site = {
     ],
   },
 
+  notFound: {
+    eyebrow: "404",
+    title: "Page not found",
+    text: "The link may be mistyped, or the page may have moved. Head back to the home page and you will find your way.",
+    cta: "Back to home",
+    meta: {
+      title: "Page not found | Index JR",
+      description: "The page you are looking for does not exist.",
+    },
+  },
   legal: {
     eyebrow: "Privacy",
     title: "Privacy and terms",

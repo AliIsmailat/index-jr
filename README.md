@@ -2,7 +2,7 @@
 
 Portfolio and business site for Index JR, a one-person web studio in Malmö building fast, accessible websites for local businesses. Swedish and English, light and dark theme.
 
-**Live:** https://indexjr.netlify.app/
+**Live:** https://indexjr.com
 
 ## Highlights
 
@@ -15,7 +15,7 @@ Portfolio and business site for Index JR, a one-person web studio in Malmö buil
 - **SEO.** Per-page canonical and `hreflang` tags, sitemap, Open Graph metadata and `llms.txt`, all generated at build time.
 - **No cookies, no analytics.** The theme choice is the only thing stored, in the browser's `localStorage`.
 
-Lighthouse (mobile): Performance 96, Accessibility 100, Best Practices 100, SEO 100.
+Lighthouse (mobile, production): Performance 99, Accessibility 100, Best Practices 100, SEO 100.
 
 ## Tech stack
 
@@ -67,11 +67,11 @@ Pushing to `main` deploys on Netlify (`npm run build`, publish directory `dist`)
 
 The contact function needs these environment variables in Netlify:
 
-| Variable             | Purpose                                                                      |
-| -------------------- | ---------------------------------------------------------------------------- |
-| `RESEND_API_KEY`     | Resend API key (mark as secret)                                              |
-| `CONTACT_TO_EMAIL`   | Address that receives the enquiries                                          |
-| `CONTACT_FROM_EMAIL` | Optional sender, defaults to Resend's test sender until a domain is verified |
+| Variable             | Purpose                                                                            |
+| -------------------- | ---------------------------------------------------------------------------------- |
+| `RESEND_API_KEY`     | Resend API key (mark as secret)                                                    |
+| `CONTACT_TO_EMAIL`   | Address that receives the enquiries                                                |
+| `CONTACT_FROM_EMAIL` | Sender on the verified Resend domain, for example `Index JR <noreply@indexjr.com>` |
 
 Netlify Forms was replaced because email notifications for it require a paid plan.
 

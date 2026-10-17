@@ -6,11 +6,12 @@ import { LangProvider } from "../content/i18n/LangProvider";
 import { langFromPath, pageFromPath } from "../content/i18n/lang";
 
 const root = document.getElementById("root")!;
+
 const page = pageFromPath();
 
 const tree = (
   <StrictMode>
-    <LangProvider initialLang={langFromPath()} page={page}>
+    <LangProvider initialLang={page === "notfound" ? "sv" : langFromPath()} page={page}>
       <App page={page} />
     </LangProvider>
   </StrictMode>

@@ -36,7 +36,7 @@ export const projectData: Record<ProjectId, ProjectData> = {
   },
 };
 
-export const siteUrl = "";
+export const siteUrl = "https://indexjr.com";
 export const social = {
   instagram: { url: "https://www.instagram.com/index.jr/", handle: "index.jr" },
   github: { url: "https://github.com/AliIsmailat", handle: "AliIsmailat" },

@@ -212,11 +212,11 @@ export const sv = {
         },
         {
           title: "Vem får del av uppgifterna?",
-          text: "Formuläret drivs av Netlify, som lagrar inskicken och använder spamfiltret Akismet (Automattic). Mejl hanteras av Namecheap (Private Email). Jag säljer eller delar aldrig uppgifter för marknadsföring.",
+          text: "Formuläret skickas via sajtens webbhotell Netlify till e-posttjänsten Resend, som levererar meddelandet till min inkorg. Resend kan spara en logg över utskicket i upp till 30 dagar. Mejl hanteras av Namecheap (Private Email). Inga uppgifter sparas i någon databas på sajten. Jag säljer eller delar aldrig uppgifter för marknadsföring.",
         },
         {
           title: "Överföring utanför EU",
-          text: "Netlify har underbiträden i USA och är certifierat under EU-US Data Privacy Framework. Min e-postleverantör Namecheap kan också behandla uppgifter utanför EU.",
+          text: "Netlify och Resend har underbiträden i USA och är båda certifierade under EU-US Data Privacy Framework. Min e-postleverantör Namecheap kan också behandla uppgifter utanför EU.",
         },
         {
           title: "Dina rättigheter",

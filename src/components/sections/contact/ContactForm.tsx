@@ -52,13 +52,16 @@ export function ContactForm() {
 
     setSending(true);
     setFailed(false);
-    const data = new FormData(form);
-    data.set("topic", content.topics[Number(values.topic)]);
+    const honeypot = String(new FormData(form).get("bot-field") ?? "");
     try {
-      const response = await fetch("/", {
+      const response = await fetch("/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(data as unknown as Record<string, string>).toString(),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...values,
+          topic: content.topics[Number(values.topic)],
+          "bot-field": honeypot,
+        }),
       });
       if (!response.ok) throw new Error(String(response.status));
       setSent(values);
@@ -149,14 +152,10 @@ export function ContactForm() {
         ) : (
           <form
             name="contact"
-            method="POST"
-            data-netlify="true"
-            data-netlify-honeypot="bot-field"
             noValidate
             onSubmit={onSubmit}
             className="grid gap-6 self-start rounded-card bg-surface p-6 text-text sm:p-8"
           >
-            <input type="hidden" name="form-name" value="contact" />
             <p className="hidden">
               <label>
                 {content.honeypotLabel} <input name="bot-field" tabIndex={-1} autoComplete="off" />

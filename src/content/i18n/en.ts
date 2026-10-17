@@ -215,11 +215,11 @@ export const en: Site = {
         },
         {
           title: "Who receives the data?",
-          text: "The form is run by Netlify, which stores submissions and uses the spam filter Akismet (Automattic). Email is handled by Namecheap (Private Email). I never sell or share data for marketing.",
+          text: "The form is sent through the web host Netlify to the email service Resend, which delivers the message to my inbox. Resend may keep a log of the delivery for up to 30 days. Email is handled by Namecheap (Private Email). No data is stored in any database on the site. I never sell or share data for marketing.",
         },
         {
           title: "Transfers outside the EU",
-          text: "Netlify has sub-processors in the USA and is certified under the EU-US Data Privacy Framework. My email provider Namecheap may also process data outside the EU.",
+          text: "Netlify and Resend have sub-processors in the USA and are both certified under the EU-US Data Privacy Framework. My email provider Namecheap may also process data outside the EU.",
         },
         {
           title: "Your rights",
